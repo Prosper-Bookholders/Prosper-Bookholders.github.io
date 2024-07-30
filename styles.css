@@ -370,8 +370,8 @@ header {
     font-family: "Montserrat";
     font-size: 23px;
     transition: all 0.3s ease 0s; 
-    margin-left: 90px;
-    margin-top: 10px;
+    margin-left: 12%;
+    margin-top: 2%;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -457,7 +457,7 @@ header {
     border-left: 2px solid rgb(255, 255, 255);
     height: 90%;
     position: absolute;
-    left: 45%;
+    left: 50%;
     margin-left: -3px;
     margin-top: 0px;
     -webkit-user-select: none;

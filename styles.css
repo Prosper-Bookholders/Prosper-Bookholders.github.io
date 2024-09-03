@@ -115,6 +115,10 @@ header {
     user-select: none;
 }
 
+.contactContainer{
+    align-content: center;
+}
+
 .information {
     margin-top: 5%;
     -webkit-user-select: none;
@@ -159,7 +163,8 @@ header {
 .phoneImage {
     width: 4%;
     height: 4%;
-    margin-right: 20px;
+    margin-left: 15%;
+    margin-right: 3%;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -195,7 +200,8 @@ header {
 .backupPhoneImage {
     width: 4%;
     height: 4%;
-    margin-right: 20px;
+    margin-left: 15%;
+    margin-right: 3%;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -231,6 +237,8 @@ header {
 .emailImage {
     width: 7%;
     height: 7%;
+    margin-left: 15%;
+    margin-right: 2%;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -260,13 +268,13 @@ header {
 .homeImage {
     height: 3%;
     width: 5%;
-    margin-left: 35%;
+    margin-left: 40%;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-.aryanLocation {
+.person1Location {
     display: flex;
     align-items: center;
     -webkit-user-select: none;
@@ -274,7 +282,7 @@ header {
     user-select: none;
 }
 
-.aryanAddress {
+.person1Address {
     flex: 1 1 auto;
     color: white;
     line-height: 1.6;
@@ -284,11 +292,11 @@ header {
     transition: all 0.3s ease 0s;
 }
 
-.aryanAddress:hover {
+.person1Address:hover {
     color: #245990;
 }
 
-.aaradhyaLocation {
+.person2Location {
     display: flex;
     align-items: center;
     -webkit-user-select: none;
@@ -296,32 +304,7 @@ header {
     user-select: none;
 }
 
-.aaradhyaAddress {
-    flex: 1 1 auto;
-    color: white;
-    line-height: 1.6;
-    font-family: "Montserrat";
-    font-size: 23px;
-    margin-left: 10px;
-    transition: all 0.3s ease 0s;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.aaradhyaAddress:hover {
-    color: #245990;
-}
-
-.apeLocation {
-    display: flex;
-    align-items: center;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.apeAddress {
+.person2Address {
     flex: 1 1 auto;
     color: white;
     line-height: 1.6;
@@ -334,11 +317,11 @@ header {
     user-select: none;
 }
 
-.apeAddress:hover {
+.person2Address:hover {
     color: #245990;
 }
 
-.harshuLocation {
+.person3Location {
     display: flex;
     align-items: center;
     -webkit-user-select: none;
@@ -346,7 +329,7 @@ header {
     user-select: none;
 }
 
-.harshuAddress {
+.person3Address {
     flex: 1 1 auto;
     color: white;
     line-height: 1.6;
@@ -359,110 +342,122 @@ header {
     user-select: none;
 }
 
-.harshuAddress:hover {
+.person3Address:hover {
     color: #245990;
 }
 
-.donation{
-    flex: 1 1 auto;
-    color: white;
-    line-height: 1.6;
-    font-family: "Montserrat";
-    font-size: 23px;
-    transition: all 0.3s ease 0s; 
-    margin-left: 12%;
-    margin-top: 2%;
+.person4Location {
+    display: flex;
+    align-items: center;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-.venmo{
+.person4Address {
     flex: 1 1 auto;
     color: white;
     line-height: 1.6;
     font-family: "Montserrat";
-    font-size: 26px;
-    margin-left: 50px;
+    font-size: 23px;
+    margin-left: 10px;
+    transition: all 0.3s ease 0s;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.person4Address:hover {
+    color: #245990;
+}
+
+.venmoText{
+    color: white;
+    line-height: 1.6;
+    font-family: "Montserrat";
+    font-size: 23px;
+    margin-left: 140%;
+    margin-top: 10%;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.zelleText{
+    flex: 1 1 auto;
+    color: white;
+    line-height: 1.6;
+    font-family: "Montserrat";
+    font-size: 23px;
+    margin-left: 145%;
+    margin-top: 10%;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.cashappText{
+    flex: 1 1 auto;
+    color: white;
+    line-height: 1.6;
+    font-family: "Montserrat";
+    font-size: 23px;
+    margin-left: 140%;
+    margin-top: 10%;
+    white-space: nowrap;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
 .venmoCode{
-    width: 200px;
-    height: 200px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.zelle{
-    flex: 1 1 auto;
-    color: white;
-    line-height: 1.6;
-    font-family: "Montserrat";
-    font-size: 26px;
-    margin-left: 160px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    margin-left: 140%;
+    height: 80%;
+    width: 80%;
 }
 
 .zelleCode{
-    width: 200px;
-    height: 200px;
-    margin-left: 100px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.cashapp{
-    flex: 1 1 auto;
-    color: white;
-    line-height: 1.6;
-    font-family: "Montserrat";
-    font-size: 26px;
-    margin-left: 190px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
+    margin-left: 140%;
+    height: 80%;
+    width: 80%;
 }
 
 .cashappCode{
-    width: 200px;
-    height: 200px;
-    margin-left: 160px;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    margin-left: 140%;
+    height: 80%;
+    width: 80%;
 }
 
-.codesContainer{
-    display: flex;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.fullContainer{
-    display: flex;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.verticalLine {
+.vertical-line {
     border-left: 2px solid rgb(255, 255, 255);
-    height: 90%;
+    height: 91%;
     position: absolute;
     left: 50%;
     margin-left: -3px;
     margin-top: 0px;
     -webkit-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none;      
+}
+
+.please{
+    flex: 1 1 auto;
+    color: white;
+    line-height: 1.6;
+    font-family: "Montserrat";
+    font-size: 23px;
+    margin-left: 42%;
+    margin-right: 2%;
+    margin-top: 1%;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+.donateContainer{
+    display:flex;
 }
 
 .ghanaProjectContainer{

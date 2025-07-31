@@ -2,41 +2,397 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Prosper Bookholders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="images/logo.webp"
-    <script defer src="script.js"> </script>
-</head>
+    <title>Prosper Bookholders - Homepage</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Configure Tailwind to use 'class' strategy for dark mode */
+        html.dark {
+            /* This class will be added to the html tag when dark mode is active */
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; /* Lightest blue background */
+            color: #1f2937; /* Darker gray text */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        /* Dark mode body styles */
+        body.dark {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+
+        /* Custom styles for the mobile menu icon */
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .hamburger-icon div {
+            width: 100%;
+            height: 3px;
+            background-color: #374151; /* Dark gray for lines */
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        /* Dark mode hamburger icon */
+        body.dark .hamburger-icon div {
+            background-color: #e2e8f0; /* Lighter gray for lines in dark mode */
+        }
+
+        /* Animation for closing the hamburger icon */
+        .hamburger-icon.open div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger-icon.open div:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-icon.open div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* CSS for the continuous flag scrolling animation */
+        @keyframes scrollFlags {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Scrolls half the width of the duplicated content for seamless loop */
+        }
+        .animate-scroll-flags {
+            animation: scrollFlags 120s linear infinite; /* Adjust duration as needed for speed */
+            display: flex; /* Ensure flex for horizontal scrolling */
+            width: max-content; /* Allow content to dictate width */
+        }
+
+        /* Style for individual SVG flags */
+        .flag-svg {
+            width: 60px; /* Consistent flag width */
+            height: 40px; /* Consistent flag height */
+            margin: 0 8px; /* Spacing between flags */
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            flex-shrink: 0; /* Prevent flags from shrinking */
+        }
+
+        .flag-img {
+            width: 60px;
+            height: 40px;
+            margin: 0 8px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            flex-shrink: 0;
+            object-fit: cover; /* Ensures no stretching */
+        }
+
+        /* Ensure flags are visible in dark mode, if their SVG paths don't define colors */
+        body.dark .flag-svg {
+            /* If flags are monochromatic, you might need to adjust their fill/stroke here */
+            /* For this example, the mock flags have their own colors */
+        }
+    </style>
+</head>
 <body>
-    <header>
-        <a href="index.html" class="name activeLink"> Prosper Bookholders </a>
-        <nav class="navBar">
-            <ul class="navLinks">
-                <li><a class="projects" href="projects.html">Projects</a></li>
-                <li><a class="donate" href="donate.html">Donate</a></li>
-                <li><a class="drop-off" href="drop-off.html">Drop-Off</a></li>
-                <li><a class="contact" href="contact.html">Contact Us</a></li>
-            </ul>
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md py-4 px-6 md:px-8 lg:px-12 rounded-b-lg dark:bg-gray-900 dark:shadow-lg transition-colors duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo/Organization Name -->
+            <a href="#" class="text-2xl font-bold text-teal-700 hover:text-teal-800 transition-colors duration-200 dark:text-teal-400 dark:hover:text-teal-300">
+                Prosper Bookholders
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex items-center space-x-6">
+            <a href="index.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Home</a>
+            <a href="Libraries.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Libraries</a>
+            <a href="Donate.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Donate</a>
+
+                <!-- Dark Mode Toggle Button (Desktop) -->
+                <button id="theme-toggle-desktop" class="ml-4 p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors duration-300 focus:outline-none">
+                    <!-- Sun icon for light mode, Moon icon for dark mode -->
+                    <span class="light-mode-icon">☀️</span>
+                    <span class="dark-mode-icon hidden">🌙</span>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Button and Dark Mode Toggle (Mobile) -->
+            <div class="flex items-center md:hidden">
+                <button id="theme-toggle-mobile" class="mr-4 p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors duration-300 focus:outline-none">
+                    <span class="light-mode-icon">☀️</span>
+                    <span class="dark-mode-icon hidden">🌙</span>
+                </button>
+                <button id="mobile-menu-button" class="focus:outline-none p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
+                    <div class="hamburger-icon" id="hamburger-icon">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu (Hidden by default) -->
+        <nav id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-50 rounded-lg shadow-inner py-2 dark:bg-gray-800 dark:shadow-none transition-colors duration-300">
+            <a href="index.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Home</a>
+            <a href="Libraries.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Libraries</a>s duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">People</a>
+            <a href="Donate.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Donate</a>
         </nav>
     </header>
 
-    <div class = "introContainer">
-        <div class = "introImage"> 
-            <img src="images/africanClassroom.jpg" class = "image">
+    <!-- Scrolling Flags Section -->
+    <section class="relative w-full overflow-hidden py-6 bg-blue-100 rounded-b-lg shadow-md dark:bg-blue-950 dark:shadow-lg transition-colors duration-300">
+        <div id="flags-container" class="flex animate-scroll-flags whitespace-nowrap">
+            <!-- SVG Flags will be dynamically loaded here by JavaScript -->
         </div>
+    </section>
 
-        <p class = "introduction"> 
-            Prosper Bookholders is a dedicated organization committed 
-            to providing books to children across multiple African 
-            countries. Having successfully raised over 1,000 books 
-            for donation, we are continually expanding our reach and i
-            mpact, striving to touch the hearts and minds of more children 
-            through the power of reading.
-        </p>
-    </div>
+    <!-- Main Content - Homepage Section -->
+    <main class="container mx-auto px-6 py-12 md:py-20 lg:py-24">
+        <section id="home" class="text-center bg-white p-8 md:p-12 lg:p-16 rounded-xl shadow-lg dark:bg-gray-800 dark:shadow-xl transition-colors duration-300">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-800 leading-tight mb-6 dark:text-blue-300">
+                Changing Lives, Library by Library.
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-8 dark:text-gray-400">
+                At Prosper Bookholders, we collect books and donate these books to other countries.
+                Books we donate are used to build libraries in schools or public spaces. We have been operating since 2024!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#mission" class="bg-teal-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 dark:bg-teal-500 dark:hover:bg-teal-600">
+                    Our Mission
+                </a>
+                <a href="Donate.html" class="bg-blue-200 text-blue-800 px-8 py-3 rounded-full font-semibold shadow-md hover:bg-blue-300 transition-all duration-300 transform hover:scale-105 dark:bg-blue-700 dark:text-blue-100 dark:hover:bg-blue-600">
+                    Donate now
+                </a>
+            </div>
+        </section>
+
+        <section id="mission" class="mt-16 bg-white p-8 md:p-12 rounded-xl shadow-lg dark:bg-gray-800 dark:shadow-xl transition-colors duration-300">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center dark:text-blue-300">Our Global Impact
+            <p class="text-gray-700 text-lg leading-relaxed max-w-4xl mx-auto mb-10 text-center dark:text-gray-400">
+                Millions worldwide lack access to books, a fundamental tool for education and personal growth. 
+                At Prosper Bookholders, we're committed to bridging this gap, one library at a time. 
+                Here are some key statistics highlighting our contributions to the world:
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center dark:bg-gray-700 dark:hover:bg-gray-600">
+                    <img src="images/Addai.webp" class="w-32 h-32 mb-4 rounded-full object-cover shadow-md">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">3 Libraries and More</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Donated books to Malawi, Botswana, and Ghana. Many more coming in the future!</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center dark:bg-gray-700 dark:hover:bg-gray-600">
+                    <img src="images/bookss.jpg" alt="Stack of books" class="w-32 h-32 mb-4 rounded-full object-cover shadow-md">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">2,000+ Books Collected</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Our dedicated community has helped us gather thousands of books, ready for new homes.</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center dark:bg-gray-700 dark:hover:bg-gray-600">
+                    <img src="images/twix.jpeg" class="w-32 h-32 mb-4 rounded-full object-cover shadow-md">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">$1,800+ Raised</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Raised over $1800 selling candy and crowdfunding</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center dark:bg-gray-700 dark:hover:bg-gray-600">
+                    <img src="country-flags/ug.svg" alt="Growth chart" class="w-32 h-32 mb-4 rounded-full object-cover shadow-md">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">Ongoing Ventures</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Currently, we are collecting books to donate to Uganda. We are trying to set up a bookdrive to Iraq.</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center dark:bg-gray-700 dark:hover:bg-gray-600">
+                    <img src="images/boy.jpeg" alt="Children reading" class="w-32 h-32 mb-4 rounded-full object-cover shadow-md">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">Hundreds of Children</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Hundreds of children can experience the joy of books by attending libraries we helped built.</p>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col items-center text-center dark:bg-gray-700 dark:hover:bg-gray-600">
+                    <img src="images/volunteers.jpeg" alt="Helping hands" class="w-32 h-32 mb-4 rounded-full object-cover shadow-md">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">500+ Volunteer Hours</h3>
+                    <p class="text-gray-700 dark:text-gray-300">The combined efforts of many teenagers collecting books, selling candy, and outreaching to local communities. The success Bookholders found would never be possible without our volunteers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="mt-16 bg-white p-8 md:p-12 rounded-xl shadow-lg dark:bg-gray-800 dark:shadow-xl transition-colors duration-300">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center dark:text-blue-300">About Us</h2>
+            <p class="text-gray-700 text-lg leading-relaxed max-w-4xl mx-auto dark:text-gray-400">
+               Prosper Bookholders is an organization dedicated to building libraries in countries around the world. 
+               We have established relationships with libraries and communities around the Dallas area through our ventures.
+               Us volunteers at bookholders are dedicated to helping those who can't always help themselves. 
+               Prosper Bookholders is run completely by high schoolers and is indepdent from the Prosper ISD district.
+            </p>
+        </section>
+
+        <section id="contact" class="mt-16 bg-white p-8 md:p-12 rounded-xl shadow-lg dark:bg-gray-800 dark:shadow-xl transition-colors duration-300">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 text-center dark:text-blue-300">Contact Us</h2>
+            <p class="text-gray-700 text-lg mb-8 text-center dark:text-gray-400">
+                Want to reach out asking for books, please fill out this form and someone will reach out to you!
+            </p>
+            <form class="max-w-xl mx-auto space-y-6">
+                <div>
+                    <label for="name" class="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-300">Name</label>
+                    <input type="text" id="name" name="name" class="w-full p-3 border border-blue-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:focus:ring-teal-400 dark:focus:border-teal-400" placeholder="Your Name">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-300">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 border border-blue-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:focus:ring-teal-400 dark:focus:border-teal-400" placeholder="your@example.com">
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-700 text-sm font-medium mb-2 dark:text-gray-300">Message</label>
+                    <textarea id="message" name="message" rows="5" class="w-full p-3 border border-blue-300 rounded-lg focus:ring-teal-500 focus:border-teal-500 transition-colors duration-200 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 dark:focus:ring-teal-400 dark:focus:border-teal-400" placeholder="Tell us about your needs..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 dark:bg-teal-500 dark:hover:bg-teal-600">
+                    Send Message
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-blue-900 text-white py-8 mt-16 rounded-t-lg dark:bg-gray-950 transition-colors duration-300">
+        <div class="container mx-auto text-center">
+            <p class="dark:text-gray-400">&copy; 2025 Prosper Bookholders. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-blue-200 hover:text-white transition-colors duration-200 dark:text-blue-400 dark:hover:text-white">Privacy Policy</a>
+                <a href="#" class="text-blue-200 hover:text-white transition-colors duration-200 dark:text-blue-400 dark:hover:text-white">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIcon.classList.toggle('open'); // Toggle the 'open' class for animation
+        });
+
+        // Close mobile menu when a link is clicked (for smoother navigation)
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                hamburgerIcon.classList.remove('open');
+            });
+        });
+
+        // Dark Mode Toggle Logic
+        const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement; // Get the html element
+        const bodyElement = document.body; // Get the body element for custom CSS transitions
+                       
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                bodyElement.classList.add('dark'); // Add dark class to body for custom CSS
+                localStorage.setItem('theme', 'dark');
+                // Show moon icon, hide sun icon
+                document.querySelectorAll('.light-mode-icon').forEach(icon => icon.classList.add('hidden'));
+                document.querySelectorAll('.dark-mode-icon').forEach(icon => icon.classList.remove('hidden'));
+            } else {
+                htmlElement.classList.remove('dark');
+                bodyElement.classList.remove('dark'); // Remove dark class from body
+                localStorage.setItem('theme', 'light');
+                // Show sun icon, hide moon icon
+                document.querySelectorAll('.light-mode-icon').forEach(icon => icon.classList.remove('hidden'));
+                document.querySelectorAll('.dark-mode-icon').forEach(icon => icon.classList.add('hidden'));
+            }
+        }
+
+        // Check for saved theme preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // If no preference, check system preference
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light mode
+        }
+
+        // Event listeners for theme toggles
+        if (themeToggleDesktop) {
+            themeToggleDesktop.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+        }
+
+        if (themeToggleMobile) {
+            themeToggleMobile.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    setTheme('light');
+                } else {
+                    setTheme('dark');
+                }
+            });
+        }
+
+        // --- Dynamic SVG Flag Loading and Display ---
+        const flagsContainer = document.getElementById('flags-container');
+        const svgSpriteContainer = document.getElementById('svg-sprite-container'); // Get the hidden container
+
+        function loadRealFlags() {
+            const flagsContainer = document.getElementById('flags-container');
+
+            const countryCodes = [
+                'ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'ao', 'aq', 'ar', 'as', 'at', 'au', 'aw', 'ax', 'az',
+                'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj', 'bl', 'bm', 'bn', 'bo', 'bq', 'br', 'bs', 'bt', 'bv', 'bw', 'by', 'bz',
+                'ca', 'cc', 'cd', 'cf', 'cg', 'ch', 'ci', 'ck', 'cl', 'cm', 'cn', 'co', 'cr', 'cu', 'cv', 'cw', 'cx', 'cy', 'cz',
+                'de', 'dj', 'dk', 'dm', 'do', 'dz',
+                'ec', 'ee', 'eg', 'eh', 'er', 'es', 'et',
+                'fi', 'fj', 'fm', 'fo', 'fr',
+                'ga', 'gb', 'gd', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn', 'gp', 'gq', 'gr', 'gt', 'gu', 'gw', 'gy',
+                'hk', 'hm', 'hn', 'hr', 'ht', 'hu',
+                'id', 'ie', 'im', 'in', 'io', 'iq', 'ir', 'is', 'it',
+                'je', 'jm', 'jo', 'jp',
+                'ke', 'kg', 'kh', 'ki', 'km', 'kn', 'kp', 'kr', 'kw', 'ky', 'kz',
+                'la', 'lb', 'lc', 'li', 'lk', 'lr', 'ls', 'lt', 'lu', 'lv', 'ly',
+                'ma', 'mc', 'md', 'me', 'mf', 'mg', 'mh', 'mk', 'ml', 'mm', 'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz',
+                'na', 'nc', 'ne', 'nf', 'ng', 'ni', 'nl', 'no', 'np', 'nr', 'nu', 'nz',
+                'om',
+                'pa', 'pe', 'pf', 'pg', 'ph', 'pk', 'pl', 'pm', 'pn', 'pr', 'pt', 'pw', 'py',
+                'qa',
+                're', 'ro', 'rs', 'ru', 'rw',
+                'sa', 'sb', 'sc', 'sd', 'se', 'sg', 'sh', 'si', 'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'sr', 'ss', 'st', 'sv', 'sx', 'sy', 'sz',
+                'tc', 'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tr', 'tt', 'tv', 'tz',
+                'ua', 'ug', 'um', 'us', 'uy', 'uz',
+                'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu',
+                'wf', 'ws',
+                'ye', 'yt',
+                'za', 'zm', 'zw'
+                ];
+
+
+            // Create <img> for each flag, then duplicate for seamless scroll
+            for (let i = 0; i < 2; i++) { // Duplicate loop for seamless scroll
+                countryCodes.forEach(code => {
+                    const img = document.createElement('img');
+                    img.src = `country-flags/${code}.svg`; // or .png if using pngs
+                    img.alt = `${code.toUpperCase()} flag`;
+                    img.className = 'flag-img'; // Use this for styling
+                    flagsContainer.appendChild(img);
+                });
+            }
+        }
+
+
+        // Call the function to load flags when the DOM is ready
+        document.addEventListener('DOMContentLoaded', loadRealFlags);
+    </script>
+
 </body>
-
 </html>

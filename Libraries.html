@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Libraries - Prosper Bookholders</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html.dark {}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff;
+            color: #1f2937;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        /* Custom styles for the mobile menu icon from your homepage */
+        .hamburger-icon { display: flex; flex-direction: column; justify-content: space-around; width: 24px; height: 24px; cursor: pointer; padding: 4px; }
+        .hamburger-icon div { width: 100%; height: 3px; background-color: #374151; border-radius: 2px; transition: all 0.3s ease-in-out; }
+        body.dark .hamburger-icon div { background-color: #e2e8f0; }
+        .hamburger-icon.open div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger-icon.open div:nth-child(2) { opacity: 0; }
+        .hamburger-icon.open div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        
+        /* Custom Timeline Styles */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem; /* 40px */
+            padding-left: 2.5rem; /* 40px */
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 10px; /* Adjust to center the line */
+            top: 5px;
+            bottom: 0;
+            width: 4px;
+            background-color: #93c5fd; /* light blue */
+        }
+        body.dark .timeline-item::before {
+            background-color: #374151; /* dark gray */
+        }
+        .timeline-item:last-child::before {
+            height: 5px; /* End the line at the last item's dot */
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            height: 24px;
+            width: 24px;
+            border-radius: 9999px;
+            border-width: 4px;
+            background-color: #f0f9ff; /* Lightest blue background */
+            border-color: #3b82f6; /* Blue-500 */
+        }
+        body.dark .timeline-dot {
+            background-color: #1a202c; /* Dark background */
+            border-color: #60a5fa; /* Blue-400 */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white shadow-md py-4 px-6 md:px-8 lg:px-12 rounded-b-lg dark:bg-gray-900 dark:shadow-lg transition-colors duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-teal-700 hover:text-teal-800 transition-colors duration-200 dark:text-teal-400 dark:hover:text-teal-300">Prosper Bookholders</a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Home</a>
+                <a href="Libraries.html" class="font-semibold text-teal-700 dark:text-teal-400 py-2 px-3 rounded-md bg-gray-100 dark:bg-gray-800">Libraries</a>
+                <a href="Donate.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Donate</a>
+                <button id="theme-toggle-desktop" class="ml-4 p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors duration-300 focus:outline-none">
+                    <span class="light-mode-icon">☀️</span> <span class="dark-mode-icon hidden">🌙</span>
+                </button>
+            </nav>
+            <div class="flex items-center md:hidden">
+                <button id="theme-toggle-mobile" class="mr-4 p-2 rounded-full"><span class="light-mode-icon">☀️</span><span class="dark-mode-icon hidden">🌙</span></button>
+                <button id="mobile-menu-button" class="focus:outline-none p-2"><div class="hamburger-icon" id="hamburger-icon"><div></div><div></div><div></div></div></button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-50 rounded-lg shadow-inner py-2 dark:bg-gray-800">
+            <a href="index.html" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700">Home</a>
+            <a href="Libraries.html" class="block py-2 px-4 text-teal-700 bg-gray-200 dark:text-teal-400 dark:bg-gray-700 font-semibold">Libraries</a>
+            <a href="Donate.html" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700">Donate</a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20 lg:py-24">
+        <section id="projects-timeline">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 dark:text-blue-300">Our Journey of Impact</h1>
+                <p class="mt-4 text-lg text-gray-700 max-w-3xl mx-auto dark:text-gray-400">
+                    Follow our story from the first book drive to our latest project, chronicled step-by-step.
+                </p>
+            </div>
+
+
+            <!-- <div class="max-w-3xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <time class="text-sm font-semibold text-blue-800 dark:text-blue-300">AUGUST 2025</time>
+                    <div class="mt-2 bg-white p-6 rounded-xl shadow-lg dark:bg-gray-800">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">IDK, Uganda</h3>
+                        <img src="https://placehold.co/600x400/be123c/FFFFFF?text=Uganda+Library" alt="Library in Uganda" class="w-full rounded-lg mb-4" id="Botswana-Photos">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            This book drive collected over 500 books, which were used to create a dedicated children's section in a public library in Kanye. The space is now filled with colorful storybooks and early readers.
+                        </p>
+                    </div>
+                </div> -->
+
+            <div class="max-w-3xl mx-auto">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <time class="text-sm font-semibold text-blue-800 dark:text-blue-300">FEBURARY 2025</time>
+                    <div class="mt-2 bg-white p-6 rounded-xl shadow-lg dark:bg-gray-800">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">Kanye, Botswana</h3>
+                        <img src="https://placehold.co/600x400/d97706/FFFFFF?text=Botswana+Library" alt="Library in Botswana" class="w-full rounded-lg mb-4" id="Botswana-Photos">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            This book drive collected over 500 books, 
+                            which were used to create a dedicated children's section in a public library in Kanye. 
+                            The space is now filled with colorful storybooks and early readers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <time class="text-sm font-semibold text-blue-800 dark:text-blue-300">OCTOBER 2024</time>
+                    <div class="mt-2 bg-white p-6 rounded-xl shadow-lg dark:bg-gray-800">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">Phalombe, Malawi</h3>
+                        <img src="https://placehold.co/600x400/7e3af2/FFFFFF?text=Malawi+Library" alt="Library in Malawi" class="w-full rounded-lg mb-4" id="Malawi-Photos">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Throughout the summer of 2024 we collected more than 
+                            500 books and raised $550 from selling 
+                            candy and crowd-funding.
+                            All of the books were donated to the Ramokgonami Primary School while the money was used to pay for the domestic/international shipment of the books
+                            in <strong>Botswana</strong> for the community! 
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <time class="text-sm font-semibold text-blue-800 dark:text-blue-300">JUNE 2024</time>
+                    <div class="mt-2 bg-white p-6 rounded-xl shadow-lg dark:bg-gray-800">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2 dark:text-teal-400">Buduburam, Ghana</h3>
+                        <img src="https://placehold.co/600x400/0694a2/FFFFFF?text=Ghana+Library" alt="Library in Ghana" class="w-full rounded-lg mb-4" id="Ghana-Photos">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Through the months of January to May of 2024 we collected 
+                            more than 600 books and raised $520 from selling 
+                            candy. All of the books were donated to the Addai 
+                            Memorial in <strong>Ghana</strong> for the community! The following 
+                            <a class = "text-teal-700" target = "_blank" href="https://www.facebook.com/addai2019/">link</a>
+                            will take you to their facebook page. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-900 text-white py-8 mt-16 rounded-t-lg dark:bg-gray-950 transition-colors duration-300">
+        <div class="container mx-auto text-center">
+             <p class="dark:text-gray-400">&copy; 2025 Prosper Bookholders. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-blue-200 hover:text-white transition-colors duration-200 dark:text-blue-400 dark:hover:text-white">Privacy Policy</a>
+                <a href="#" class="text-blue-200 hover:text-white transition-colors duration-200 dark:text-blue-400 dark:hover:text-white">Terms of Service</a>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        // JS from your homepage for menu and theme toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIcon.classList.toggle('open');
+        });
+        const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement;
+        const bodyElement = document.body;
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                bodyElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.querySelectorAll('.light-mode-icon').forEach(icon => icon.classList.add('hidden'));
+                document.querySelectorAll('.dark-mode-icon').forEach(icon => icon.classList.remove('hidden'));
+            } else {
+                htmlElement.classList.remove('dark');
+                bodyElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.querySelectorAll('.light-mode-icon').forEach(icon => icon.classList.remove('hidden'));
+                document.querySelectorAll('.dark-mode-icon').forEach(icon => icon.classList.add('hidden'));
+            }
+        }
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+        themeToggleDesktop.addEventListener('click', () => setTheme(localStorage.getItem('theme') === 'dark' ? 'light' : 'dark'));
+        themeToggleMobile.addEventListener('click', () => setTheme(localStorage.getItem('theme') === 'dark' ? 'light' : 'dark'));
+
+    </script>
+
+
+        <!-- Image Scroller Modal -->
+        <div id="image-modal" class="fixed inset-0 z-50 bg-black bg-opacity-70 hidden">
+            <div class="flex items-center justify-center h-full px-4">
+                <div class="bg-white dark:bg-gray-900 w-full max-w-3xl rounded-xl shadow-xl relative p-4 sm:p-6 overflow-hidden">
+                
+                <!-- Close Button -->
+                <button id="close-modal" class="absolute top-4 right-4 text-gray-600 dark:text-gray-300 text-3xl hover:text-red-500 z-10">&times;</button>
+                
+                <!-- Title -->
+                <div id="modal-title" class="text-lg sm:text-xl font-semibold sm:font-bold text-center text-teal-700 dark:text-teal-400 mb-4 sm:mb-6"></div>
+                
+                <!-- Horizontal Scroller -->
+                <div id="modal-scroller" class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 sm:pb-4">
+                    <!-- JS will inject images here -->
+                </div>
+                
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <script>
+        const imageModal = document.getElementById('image-modal');
+        const modalScroller = document.getElementById('modal-scroller');
+        const modalTitle = document.getElementById('modal-title');
+        const closeModal = document.getElementById('close-modal');
+
+        const imageSets = {
+            "Botswana-Photos": {
+                title: "Botswana Library Gallery",
+                images: [
+                    "https://placehold.co/600x400/7e3af2/FFFFFF?text=Botswana+1",
+                    "https://placehold.co/600x400/7e3af2/FFFFFF?text=Botswana+2",
+                    "https://placehold.co/600x400/7e3af2/FFFFFF?text=Botswana+3"
+                ]
+            },
+            "Malawi-Photos": {
+                title: "Malawi Library Gallery",
+                images: [
+                    "https://placehold.co/600x400/0694a2/FFFFFF?text=Malawi+1",
+                    "https://placehold.co/600x400/0694a2/FFFFFF?text=Malawi+2",
+                    "https://placehold.co/600x400/0694a2/FFFFFF?text=Malawi+3"
+                ]
+            },
+
+            "Ghana-Photos": {
+                title: "Ghana Library Gallery",
+                images: [
+                    "https://placehold.co/600x400/d97706/FFFFFF?text=Ghana+1",
+                    "https://placehold.co/600x400/d97706/FFFFFF?text=Ghana+2",
+                    "https://placehold.co/600x400/d97706/FFFFFF?text=Ghana+3"
+                ]
+            },
+        };
+
+        function openModal(photoId) {
+            const data = imageSets[photoId];
+            if (!data) return;
+
+            modalTitle.textContent = data.title;
+            modalScroller.innerHTML = '';
+
+            data.images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = data.title;
+                img.className = "w-80 sm:w-96 rounded-lg shadow-md snap-start flex-shrink-0";
+                modalScroller.appendChild(img);
+            });
+
+            imageModal.classList.remove('hidden');
+        }
+
+        // Add event listeners to all 3 images
+        ['Ghana-Photos', 'Botswana-Photos', 'Malawi-Photos'].forEach(id => {
+            const el = document.getElementById(id);
+            el.addEventListener('click', () => openModal(id));
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', () => imageModal.classList.add('hidden'));
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) {
+                imageModal.classList.add('hidden');
+            }
+        });
+    </script>
+
+
+</body>
+</html>

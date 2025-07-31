@@ -2,62 +2,172 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Prosper Bookholders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="images/logo.webp"
-    <script defer src="script.js"> </script>
-</script>
-</head>
+    <title>Donate - Prosper Bookholders</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        html.dark {}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff;
+            color: #1f2937;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.dark {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        /* Custom styles for the mobile menu icon from your homepage */
+        .hamburger-icon { display: flex; flex-direction: column; justify-content: space-around; width: 24px; height: 24px; cursor: pointer; padding: 4px; }
+        .hamburger-icon div { width: 100%; height: 3px; background-color: #374151; border-radius: 2px; transition: all 0.3s ease-in-out; }
+        body.dark .hamburger-icon div { background-color: #e2e8f0; }
+        .hamburger-icon.open div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger-icon.open div:nth-child(2) { opacity: 0; }
+        .hamburger-icon.open div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
+        /* Style for the progress bar fill */
+        .progress-bar-fill {
+            transition: width 0.8s ease-in-out;
+        }
+    </style>
+</head>
 <body>
-    <header>
-        <a href="index.html" id = "name" class="name"> Prosper Bookholders </a>
-        <nav class="navBar">
-            <ul class="navLinks">
-                <li><a class="projects" href="projects.html">Projects</a></li>
-                <li><a class="donate" href="donate.html">Donate</a></li>
-                <li><a class="drop-off" href="drop-off.html">Drop-Off</a></li>
-                <li><a class="contact" href="contact.html">Contact Us</a></li>
-            </ul>
+
+    <!-- Header Section (with Donate link active) -->
+    <header class="bg-white shadow-md py-4 px-6 md:px-8 lg:px-12 rounded-b-lg dark:bg-gray-900 dark:shadow-lg transition-colors duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-teal-700 hover:text-teal-800 transition-colors duration-200 dark:text-teal-400 dark:hover:text-teal-300">Prosper Bookholders</a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="index.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Home</a>
+                <a href="Libraries.html" class="text-gray-600 hover:text-teal-700 font-medium transition-colors duration-200 py-2 px-3 rounded-md hover:bg-gray-100 dark:text-gray-300 dark:hover:text-teal-400 dark:hover:bg-gray-800">Libraries</a>
+                <a href="Donate.html" class="font-semibold text-teal-700 dark:text-teal-400 py-2 px-3 rounded-md bg-gray-100 dark:bg-gray-800">Donate</a>
+                <button id="theme-toggle-desktop" class="ml-4 p-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 transition-colors duration-300 focus:outline-none">
+                    <span class="light-mode-icon">☀️</span> <span class="dark-mode-icon hidden">🌙</span>
+                </button>
+            </nav>
+            <div class="flex items-center md:hidden">
+                <button id="theme-toggle-mobile" class="mr-4 p-2 rounded-full"><span class="light-mode-icon">☀️</span><span class="dark-mode-icon hidden">🌙</span></button>
+                <button id="mobile-menu-button" class="focus:outline-none p-2"><div class="hamburger-icon" id="hamburger-icon"><div></div><div></div><div></div></div></button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="hidden md:hidden mt-4 bg-gray-50 rounded-lg shadow-inner py-2 dark:bg-gray-800">
+            <a href="index.html" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700">Home</a>
+            <a href="Libraries.html" class="block py-2 px-4 text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700">Libraries</a>
+            <a href="Donate.html" class="block py-2 px-4 text-teal-700 bg-gray-200 dark:text-teal-400 dark:bg-gray-700 font-semibold">Donate</a>
         </nav>
     </header>
 
-    <div class="donateContainer"> 
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 md:py-20 lg:py-24">
+        <section id="donate" class="max-w-3xl mx-auto text-center">
+            
+            <h1 class="text-4xl md:text-5xl font-extrabold text-blue-800 dark:text-blue-300">Help Us Build the Next Library</h1>
+            <p class="mt-4 text-lg text-gray-700 mx-auto dark:text-gray-400">
+                Your contribution directly funds the shipping of books and the purchase of essential library supplies for communities in need. Every dollar brings us closer to our goal and makes a world of difference.
+            </p>
 
-        <div class="imageStack">
-
-            <div class="venmoContainer">
-                <h1 class="venmoText"> Venmo QR Code: </h1>
-                <img src="images/fakeCode.png" class="venmoCode">
+            <!-- GoFundMe Button -->
+            <div class="mt-8">
+                <a href="YOUR_GOFUNDME_LINK_HERE" target="_blank" rel="noopener noreferrer" class="inline-block bg-teal-600 text-white px-10 py-4 rounded-full font-bold text-xl shadow-lg hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 dark:bg-teal-500 dark:hover:bg-teal-600">
+                    Donate via GoFundMe
+                </a>
             </div>
 
-            <div class="zelleContainer">
-                <h1 class="zelleText"> Zelle QR Code: </h1>
-                <img src="images/fakeCode.png" class="zelleCode">
+            <!-- Donation Progress Bar -->
+            <div class="mt-16 bg-white p-8 rounded-xl shadow-xl dark:bg-gray-800">
+                <div class="flex justify-between items-baseline mb-2">
+                    <h2 class="text-2xl font-bold text-blue-800 dark:text-blue-300">Our Current Goal</h2>
+                    <span id="progress-percentage" class="text-lg font-bold text-teal-600 dark:text-teal-400">0%</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400 mb-4 text-left">We're raising funds for our upcoming book drive to Uganda!</p>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700 overflow-hidden">
+                    <div id="progress-bar" class="progress-bar-fill bg-gradient-to-r from-teal-400 to-blue-500 h-6 rounded-full" style="width: 0%;">
+                    </div>
+                </div>
+
+                <!-- Progress Labels -->
+                <div class="flex justify-between items-center mt-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    <span id="current-amount">$0</span>
+                    <span id="goal-amount">$800</span>
+                </div>
             </div>
 
-            <div class="cashappContainer">
-                <h1 class="cashappText"> Cashapp QR Code: </h1>
-                <img src="images/fakeCode.png" class="cashappCode">
-            </div>
+        </section>
+    </main>
 
+    <!-- Footer Section -->
+    <footer class="bg-blue-900 text-white py-8 mt-16 rounded-t-lg dark:bg-gray-950 transition-colors duration-300">
+        <div class="container mx-auto text-center">
+             <p class="dark:text-gray-400">&copy; 2025 Prosper Bookholders. All rights reserved.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-blue-200 hover:text-white transition-colors duration-200 dark:text-blue-400 dark:hover:text-white">Privacy Policy</a>
+                <a href="#" class="text-blue-200 hover:text-white transition-colors duration-200 dark:text-blue-400 dark:hover:text-white">Terms of Service</a>
+            </div>
         </div>
+    </footer>
 
-        <div class="vertical-line"></div>
+    <script>
+        // --- Configuration for the Progress Bar ---
+        const currentAmount = 0; // Current amount raised
+        const goalAmount = 800;  // The goal amount
 
-        <h1 class="please"> 
-            Please donate to our cause if you can! </br>
-            Even one dollar can go a long way and buy 2-4 books for our book drives, every dollar makes a difference for us! </br>
-            We accept venmo, cashapp, and zelle, if you do make a donation please reach out to us so we can thank you.
-        </h1>
+        // --- JavaScript to update the progress bar ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('progress-bar');
+            const currentAmountEl = document.getElementById('current-amount');
+            const goalAmountEl = document.getElementById('goal-amount');
+            const progressPercentageEl = document.getElementById('progress-percentage');
 
-    </div> 
+            // Calculate the percentage
+            const percentage = Math.min((currentAmount / goalAmount) * 100, 100);
+
+            // Update the UI elements
+            // Using a timeout to make the fill animation visible on page load
+            setTimeout(() => {
+                progressBar.style.width = percentage + '%';
+            }, 300);
+
+            progressPercentageEl.textContent = Math.round(percentage) + '%';
+            currentAmountEl.textContent = '$' + currentAmount.toLocaleString();
+            goalAmountEl.textContent = '$' + goalAmount.toLocaleString();
+        });
 
 
-
-    <script src="script.js"></script>
+        // --- JS from your homepage for menu and theme toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIcon.classList.toggle('open');
+        });
+        const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement;
+        const bodyElement = document.body;
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                bodyElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.querySelectorAll('.light-mode-icon').forEach(icon => icon.classList.add('hidden'));
+                document.querySelectorAll('.dark-mode-icon').forEach(icon => icon.classList.remove('hidden'));
+            } else {
+                htmlElement.classList.remove('dark');
+                bodyElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.querySelectorAll('.light-mode-icon').forEach(icon => icon.classList.remove('hidden'));
+                document.querySelectorAll('.dark-mode-icon').forEach(icon => icon.classList.add('hidden'));
+            }
+        }
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+        themeToggleDesktop.addEventListener('click', () => setTheme(localStorage.getItem('theme') === 'dark' ? 'light' : 'dark'));
+        themeToggleMobile.addEventListener('click', () => setTheme(localStorage.getItem('theme') === 'dark' ? 'light' : 'dark'));
+    </script>
 </body>
-
 </html>
